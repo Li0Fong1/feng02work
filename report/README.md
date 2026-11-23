@@ -12,7 +12,7 @@
 
 ### 2.1 仓库创建
 
-在 GitHub 上用本人账号新建了 `feng02work`，Owner 是 Li0Fong1，可见性选 Public，默认分支保持 main。建好后从 Code 页复制 HTTPS 地址，在本地用 `git clone` 拉下来。仓库刚建好是空的，克隆时 Git 提示 "You appear to have cloned an empty repository."，属于正常情况。
+本人账号下的 `feng02work` 仓库是 Public，默认分支 main。从 Code 页复制 HTTPS 地址，在本地用 `git clone` 拉下来。仓库当时是空的，克隆时 Git 提示 "You appear to have cloned an empty repository."。
 
 ![个人公开仓库](images/01-repository.png)
 
@@ -38,7 +38,7 @@ python -m mkdocs build --strict
 python -m mkdocs serve
 ```
 
-`build --strict` 实际跑通了，输出 "Documentation built in 1.72 seconds"，`site/` 下生成了 51 个文件。启动 `serve` 后浏览器打开 `http://127.0.0.1:8000/`，逐页看了导航、表格和代码块。
+`build --strict` 跑通了，输出 "Documentation built in 1.72 seconds"，`site/` 下生成了 51 个文件。启动 `serve` 后浏览器打开 `http://127.0.0.1:8000/feng02work/`，看了首页的导航和正文；另外三页是用命令抓页面元素核对的（见 2.6）。
 
 ![本地预览](images/03-local-preview.png)
 
@@ -50,7 +50,7 @@ python -m mkdocs serve
 
 ![Pages 来源设为 GitHub Actions](images/04-pages-source.png)
 
-没有建 `gh-pages` 分支，也没有改仓库默认权限、没有勾选允许 Actions 创建 PR，用的就是文档里的官方工作流。
+按文档用了官方工作流，没有建 `gh-pages` 分支，仓库的 Actions 权限保持默认。
 
 ### 2.5 Actions 首次构建和部署
 
@@ -66,18 +66,17 @@ git push origin main
 
 ![首次 Actions 运行](images/05-first-run.png)
 
-`build` 用时 26 秒、`deploy` 用时 10 秒，总时长 37 秒，两个 job 都是绿勾。Artifacts 里生成了 `github-pages`，587 KB。Annotations 里有 2 条 warning，内容是 Node.js 20 即将停止支持、相关 action 会被强制用 Node 24 运行，不影响结果，但如实记下来。
+`build` 用时 26 秒、`deploy` 用时 10 秒，总时长 37 秒，两个 job 都是绿勾。Artifacts 里生成了 `github-pages`，587 KB。Annotations 里有 2 条 warning，原文是 "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24"，一条在 build、一条在 deploy，不影响结果。
 
 ### 2.6 网站访问与四页导航检查
 
-部署完成后从运行详情页和 Pages 设置里都能看到网址，实际打开的是 `https://li0fong1.github.io/feng02work/`（GitHub 把地址栏里的用户名显示成小写）。四页都打开看过：
+部署完成后从运行详情页和 Pages 设置里都能看到网址，实际打开的是 `https://li0fong1.github.io/feng02work/`（地址栏里用户名显示成小写）。浏览器里打开了首页，标题「我的技术文档」，左侧导航列出首页、关于、使用指南、API参考。另外三页没有在浏览器里逐页点开，是用命令抓 HTML 核对的：
 
-- 首页标题「我的技术文档」，左侧导航列出首页、关于、使用指南、API参考
-- 关于页有技术组成表格
-- 使用指南页有命令代码块
-- API 参考页有 JSON 示例和字段表格
+- 关于页 title「关于 - 我的技术文档」，有 `<table>` 技术组成表格
+- 使用指南页 title「使用指南 - 我的技术文档」，有代码块
+- API 参考页 title「API参考 - 我的技术文档」，有 JSON 示例和字段表格
 
-另外用命令逐页请求了一遍，首页、about/、guide/、api/ 都返回 200。
+四个地址（首页、about/、guide/、api/）请求后都返回 200。
 
 ![公开网站首页](images/06-site-home.png)
 
@@ -106,7 +105,7 @@ git push origin main
 
 ![网站出现新增文字](images/07b-site-updated.png)
 
-刷新网站后，新增的那句补记出现在首页正文里，说明第二次推送确实自动更新了网站。中间用过强制刷新，避免浏览器缓存造成误判。
+刷新网站后，新增的那句补记出现在首页正文里，说明第二次推送确实自动更新了网站。另外用命令直接请求首页 HTML，也确认那句话已经在页面里，不只是浏览器缓存。
 
 ## 3. 问题与解决
 
