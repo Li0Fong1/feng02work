@@ -3,7 +3,7 @@
 MkDocs 文档 + GitHub Actions 自动部署到 GitHub Pages 的练习仓库。四页文档放在 `docs/`，过程记录见 [个人实验报告](report/README.md)。
 
 - 源码仓库：https://github.com/Li0Fong1/feng02work
-- 公开网站：部署完成后在 Pages 设置里给出的地址（见报告）
+- 公开网站：https://li0fong1.github.io/feng02work/
 - 报告：[report/README.md](report/README.md)
 
 ## 本地预览
