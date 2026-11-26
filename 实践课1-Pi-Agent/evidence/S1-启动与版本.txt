@@ -1,0 +1,17 @@
+采集时间: 2026-11-14 19:40:00 +0800
+
+===== 启动与版本（任务一 / 截图 S1 的文字等价证据） =====
+$ pi --version
+1.5.0
+$ pi --list-models
+provider  model            context  max-out  thinking  images
+deepseek  deepseek-flash   1M       384K     yes       yes   
+deepseek  deepseek-v4-pro  1M       384K     yes       no    
+
+===== 在专用练习文件夹中真实启动一次会话 =====
+$ cd D:/师大本科WORK/github/实践课1-Pi-Agent/pi-test && pi -p --model deepseek-flash "请报告当前工作目录和当前模型，一句话即可。"
+当前工作目录为 `D:/师大本科WORK/github/实践课1-Pi-Agent/pi-test`，当前模型为 `deepseek-flash`（provider: deepseek，推理等级 high）。
+
+===== 说明 =====
+Pi 已成功启动（非下载进度），版本 1.5.0；出现模型列表即表示客户端可用。
+TUI 截图 S1 需显示版本信息与当前工作目录，由本人在终端补拍。

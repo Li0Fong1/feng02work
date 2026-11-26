@@ -1,0 +1,29 @@
+sequenceDiagram
+    autonumber
+    participant U as 用户
+    participant UI as 交互与会话层<br/>interactive-mode.ts
+    participant AG as Agent 执行层<br/>agent.ts / agent-loop.ts
+    participant AI as 模型请求层<br/>ai provider 适配器
+    participant RD as read 工具<br/>core/tools/read.ts
+    participant M as 远程模型服务
+
+    U->>UI: 输入“请用 read 工具读取当前目录的 handoff.txt……”
+    Note over UI: defaultEditor.onSubmit<br/>interactive-mode.ts:3043
+    UI->>AG: Agent.prompt()<br/>agent.ts:366
+    Note over AG: runLoop → streamAssistantResponse<br/>agent-loop.ts:218,345
+    AG->>AG: 组装 llmContext
+    AG->>AI: streamFunction(config.model, llmContext, ...)<br/>agent-loop.ts:363
+    AI->>M: provider HTTP 请求（统一 api 适配）
+    M-->>AI: 流式响应
+    AI-->>AG: AssistantMessage 流（含 toolCall）
+    AG->>RD: executeToolCalls(currentContext, message, ...)
+    Note over RD: fsReadFile(handoff.txt) 走 Buffer<br/>read.ts:4,111,128（不是流式读取）
+    RD-->>AG: ToolResultMessage
+    AG->>AG: currentContext.messages.push(result)<br/>agent-loop.ts:244
+    AG->>AI: 下一轮 streamFunction（上下文已多一条工具结果）
+    AI->>M: 第二轮 HTTP 请求
+    M-->>AI: 流式回复
+    AI-->>AG: 文本 AssistantMessage
+    AG-->>UI: emit(message_update / message_end)
+    Note over UI: interactive-mode.ts:3331 / 3366
+    UI-->>U: 屏幕显示待办与完整启动命令

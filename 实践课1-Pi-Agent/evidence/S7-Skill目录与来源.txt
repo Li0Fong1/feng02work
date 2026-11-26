@@ -1,0 +1,46 @@
+采集时间: 2026-11-14 19:41:25 +0800
+
+===== PPT Skill 安装来源（任务六 / 截图 S7） =====
+$ cat source-commit.txt
+repo: https://github.com/anthropics/skills
+ref: main
+commit: 2c5958ecac7cee2b583967a2c4981d0f4a75c579
+source dir: skills/pptx/
+files: 56
+
+===== 文件总数 =====
+文件数: 56
+
+===== 目录结构（前三层） =====
+d .pi/skills/pptx
+d .pi/skills/pptx/scripts
+d .pi/skills/pptx/scripts/office
+d .pi/skills/pptx/scripts/office/helpers
+d .pi/skills/pptx/scripts/office/schemas
+d .pi/skills/pptx/scripts/office/validators
+f .pi/skills/pptx/LICENSE.txt
+f .pi/skills/pptx/SKILL.md
+f .pi/skills/pptx/scripts/__init__.py
+f .pi/skills/pptx/scripts/add_slide.py
+f .pi/skills/pptx/scripts/clean.py
+f .pi/skills/pptx/scripts/office/soffice.py
+f .pi/skills/pptx/scripts/office/validate.py
+f .pi/skills/pptx/scripts/thumbnail.py
+
+===== SKILL.md frontmatter =====
+---
+name: pptx
+description: "Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates (.potx), layouts, speaker notes, or comments. Trigger whenever the user mentions \"deck,\" \"slides,\" \"presentation,\" or references a .pptx or .potx filename, regardless of what they plan to do with the content afterward. If a .pptx or .potx file needs to be opened, created, or touched, use this skill."
+license: Complete terms in LICENSE.txt
+---
+
+# PPTX creation, editing, and analysis
+
+A `.pptx` is a ZIP archive of XML files. Choose your approach by task:
+
+| Task | Approach |
+|---|---|
+
+===== 说明 =====
+安装位置为项目级 .pi/skills/pptx（不是随便放在 study/pptx），Pi 才会自动发现。
+保留 SKILL.md、LICENSE.txt 与 scripts 全部支持文件，共 56 个，源 commit 已记录。

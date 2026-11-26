@@ -1,0 +1,15 @@
+flowchart LR
+  U["用户终端输入"] --> CA["coding-agent<br/>dist/cli.js<br/>会话与交互层"]
+  CA -->|"Agent.prompt()"| A["agent<br/>agent-loop.ts<br/>runLoop / streamAssistantResponse"]
+  A -->|"streamFunction(config.model, llmContext, ...)"| AI["ai<br/>provider 适配器<br/>统一模型请求"]
+  AI <-->|"HTTP 请求 / 流式响应"| M["远程模型服务<br/>DeepSeek"]
+  M -->|"AssistantMessage 流"| A
+  A -->|"executeToolCalls → toolResults"| T["read 工具<br/>fsReadFile(practice4.txt)"]
+  T -->|"ToolResultMessage"| A
+  A -->|"currentContext.messages.push(result)"| A
+  A -->|"下一轮 streamFunction"| AI
+  A -->|"emit(message_update / message_end)"| CA
+  CA -->|"显示回复"| U
+
+  classDef log fill:#fff3cd,stroke:#b8860b,color:#000;
+  class A,AI,M,T log;

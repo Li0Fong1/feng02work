@@ -1,0 +1,44 @@
+采集时间: 2026-11-14 19:42 +0800
+
+===== 选做：用新装好的 pptx Skill 生成两页 PPT（任务六第四层次） =====
+说明：指导书指出「安装成功、发现成功、调用成功、生成 PPT 成功是四个层次」，
+本项在前三层之外补做第四层，并核查文件能打开。
+
+----- 依赖检查（按 SKILL.md 要求，先检查再按实际任务补齐） -----
+$ npm view pptxgenjs version
+4.0.1                      （npm registry 可达）
+$ node -e "require('pptxgenjs')" 首次未安装
+  → SKILL.md 声称 pptxgenjs 预装，本机实测没有，按实际补齐：
+$ npm install pptxgenjs --no-save --no-package-lock --no-audit --no-fund
+added 19 packages in 20s
+$ python3 .pi/skills/pptx/scripts/office/validate.py 两页演示.pptx
+ModuleNotFoundError: No module named 'defusedxml'
+  → 按实际补齐：
+$ python3 -m pip install defusedxml lxml
+（soffice / markitdown 本机未安装；本次仅做生成与文件级校验，不做 PDF 视觉检查）
+
+----- 生成 -----
+$ node make_two_slides.js
+已生成：D:\师大本科WORK\github\实践课1-Pi-Agent\study\两页演示.pptx
+
+脚本遵守 SKILL.md 的 footguns：先设 pres.layout = LAYOUT_WIDE；
+颜色只用 6 位 hex 且不带 #；不复用 options 对象；不用阴影；
+列表用 bullet:true + breakLine（末项除外）；一个输出文件一个 pptxgen 实例。
+第 1 页为封面；第 2 页用表格列出六项任务，并插入任务四的 200×200 小图片，
+避免「纯文字页」。
+
+----- 文件能打开的核查 -----
+$ python3  （zipfile 检查）
+ZIP 条目数: 44
+幻灯片: ['ppt/slides/slide1.xml', 'ppt/slides/slide2.xml']
+第一页含标题文字: True
+第二页含表格: True
+CRC 校验: OK（全部条目完整）
+
+$ python3 .pi/skills/pptx/scripts/office/validate.py 两页演示.pptx
+All validations PASSED!
+
+----- 结论 -----
+生成的两页 .pptx 通过 OOXML schema / 关系 / 内容类型校验，包内结构完整。
+Skill 文本中「pptxgenjs 已预装」属于它对环境的基础假设，不能直接当成本机事实，
+本次按实际检查结果补齐了依赖，印证了指导书的提醒。

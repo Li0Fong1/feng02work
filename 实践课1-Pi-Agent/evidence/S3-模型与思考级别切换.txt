@@ -1,0 +1,46 @@
+采集时间: 2026-11-14 19:40:19 +0800
+
+===== 切换前：deepseek-flash / thinking low（任务三 / 截图 S3） =====
+TUI 等价命令：/model 或 Ctrl+L 选模型；/thinking 或 Shift+Tab 选思考级别
+$ pi -p --model deepseek-flash --thinking low "..."
+我执行了 `env | grep '^PI_'`，输出如下：
+
+```
+PI_CODING_AGENT=true
+PI_REASONING_LEVEL=low
+PI_PROVIDER=deepseek
+PI_MODEL=deepseek-flash
+PI_SESSION_ID=01a1d9db-c5b7-700b-956b-6d284c3d001f
+```
+
+- **当前模型 ID**：`deepseek-flash`（提供方为 `deepseek`）
+- **思考级别**：`low`
+
+**持续集成（CI）**：开发人员频繁地把代码合并到主干分支后，由自动化流水线自动完成构建、测试和检查，以便尽早发现集成问题。
+
+===== 切换后：deepseek-v4-pro / thinking high =====
+$ pi -p --model deepseek-v4-pro --thinking high "..."
+已列出 `PI_` 开头的环境变量，结果如下：
+
+- `PI_CODING_AGENT=true`
+- `PI_MODEL=deepseek-v4-pro`
+- `PI_PROVIDER=deepseek`
+- `PI_REASONING_LEVEL=high`
+- `PI_SESSION_ID=01a1d9db-e244-748b-9b24-854163892222`
+
+**据此说明：**
+
+- **当前模型 ID**：`deepseek-v4-pro`（由 `PI_MODEL` 提供，供应商为 `deepseek`）
+- **思考级别**：`high`（由 `PI_REASONING_LEVEL` 提供）
+
+**持续集成（一句话解释）：** 持续集成（CI）是一种开发实践，指团队成员频繁（通常每天多次）将代码改动合并到共享主干，并通过自动化的构建与测试来尽早发现和修复集成问题。
+
+===== 可用模型与其能力（pi --list-models） =====
+provider  model            context  max-out  thinking  images
+deepseek  deepseek-flash   1M       384K     yes       yes   
+deepseek  deepseek-v4-pro  1M       384K     yes       no    
+
+===== 说明 =====
+PI_MODEL / PI_REASONING_LEVEL 由 Pi 自身注入，是切换前后状态的客观证据。
+思考级别是推理设置，不是换模型，也不是显示/隐藏思考文本。
+简单事实问答用低级别即可；需要多步推理时再提高级别，代价是等待时间与用量增加。

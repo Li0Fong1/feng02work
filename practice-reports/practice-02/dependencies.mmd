@@ -1,0 +1,58 @@
+flowchart LR
+  subgraph L0["第 0 层：基础库（无内部依赖）"]
+    chord["chord<br/>@earendil-works/chord"]
+    telemetry["telemetry<br/>@earendil-works/pi-telemetry<br/>内含 schema 类型工具"]
+    tui["tui<br/>@earendil-works/pi-tui"]
+  end
+
+  subgraph L1["第 1 层：模型接口与协议"]
+    ai["ai<br/>@earendil-works/pi-ai"]
+    protocol["protocol<br/>@earendil-works/pi-protocol"]
+  end
+
+  subgraph L2["第 2 层：运行时 / 会话"]
+    durable["durable<br/>@earendil-works/pi-durable"]
+    agent["agent<br/>@earendil-works/pi-agent-core<br/>内含 env"]
+    client["client<br/>@earendil-works/pi-client"]
+  end
+
+  subgraph L3["第 3 层：后端与存储"]
+    sqlite["session-backends/sqlite-node"]
+    server["server<br/>@earendil-works/pi-server"]
+  end
+
+  subgraph L4["第 4 层：应用"]
+    coding["coding-agent<br/>@earendil-works/pi-coding-agent"]
+  end
+
+  subgraph DEV["开发 / 评估：不在默认 build 链路"]
+    evals["evals"]
+  end
+
+  ai --> telemetry
+  durable --> chord
+  durable --> ai
+  agent --> chord
+  agent --> ai
+  agent --> telemetry
+  protocol --> chord
+  client --> chord
+  client --> protocol
+  sqlite --> ai
+  sqlite --> agent
+  server --> chord
+  server --> agent
+  server --> protocol
+  coding --> chord
+  coding --> agent
+  coding --> ai
+  coding --> tui
+
+  coding -.-> client
+  coding -.-> protocol
+  coding -.-> server
+  evals -.-> ai
+  evals -.-> coding
+
+  %% 本版本没有独立包：schema（内嵌 telemetry）、env（内嵌 agent）、
+  %% mcp（coding-agent README:501 明示 No MCP）、codemode（未找到任何证据）

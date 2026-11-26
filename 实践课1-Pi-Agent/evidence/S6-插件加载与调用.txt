@@ -1,0 +1,33 @@
+采集时间: 2026-11-14 19:41:01 +0800
+
+===== 插件信息（任务五 / 截图 S6） =====
+名称：pi-web-access
+来源：Pi Packages https://pi.dev/packages （npm 包 pi-web-access@0.47.0）
+安装命令：pi install npm:pi-web-access   （用户级安装）
+作用：为 Pi 增加 web_search / source_check / fetch_content / get_search_content 等联网工具
+所需配置：零配置可用（Exa MCP），可选在 ~/.pi/agent/web-search.json 配置更多提供商
+
+===== pi list —— 已安装包与来源 =====
+User packages:
+  npm:pi-web-access
+    C:\Users\Lenovo\.pi\agent\npm\node_modules\pi-web-access
+
+===== 加载证明：正常启动 vs --no-extensions 的可用工具对比 =====
+$ pi -p --model deepseek-flash "请只列出你当前可用的工具名称..."
+[正常启动]
+read, bash, edit, write, web_search, source_check, fetch_content, get_search_content
+[--no-extensions 启动]
+read, bash, edit, write
+差值即为插件注册的工具，证明包不只是『已安装』而是『已加载』。
+
+===== 最小功能调用：获取 https://example.com 的页面标题 =====
+$ pi -p --model deepseek-flash "请使用网页抓取工具获取 https://example.com 的页面标题..."
+**页面标题：`Example Domain`**
+
+说明：
+- 实际调用的工具是 **`fetch_content`**（网页抓取工具）。
+- 第一次调用使用 `mode: "readable"` 失败（页面可见文本过少，被判为不完整）；
+- 第二次改用 `mode: "raw"` 直接 HTTP 取回原始 HTML，从 `<title>Example Domain</title>` 中确认了标题。
+
+===== 说明 =====
+安装成功、加载成功、联网功能可用三者分别记录；TUI 重启后的 [Extensions] 区域截图由本人补拍。

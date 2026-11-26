@@ -1,0 +1,30 @@
+采集时间: 2026-11-14 19:39:49 +0800
+
+===== 运行环境（任务一） =====
+$ node -v
+v22.22.2
+$ npm -v
+10.9.7
+$ git --version
+git version 2.55.0.windows.3
+$ pi --version
+1.5.0
+$ which pi
+/c/Users/Lenovo/AppData/Roaming/npm/pi
+$ pwd  (专用练习文件夹)
+/d/师大本科WORK/github/实践课1-Pi-Agent/pi-test
+
+===== 可用模型（pi --list-models） =====
+provider  model            context  max-out  thinking  images
+deepseek  deepseek-flash   1M       384K     yes       yes   
+deepseek  deepseek-v4-pro  1M       384K     yes       no    
+
+===== 已安装包（pi list） =====
+User packages:
+  npm:pi-web-access
+    C:\Users\Lenovo\.pi\agent\npm\node_modules\pi-web-access
+
+===== 配置说明 =====
+用户级配置目录 C:\Users\Lenovo\.pi -> D:\师大本科WORK\github\pi-config（符号链接）
+auth.json 已存在: yes  —— 内容含密钥，不展示、不提交
+models-store.json 已存在: yes
