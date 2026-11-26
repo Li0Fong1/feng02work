@@ -66,14 +66,14 @@ practice-reports/
 
 这些改动未 commit、未 push。是否提交到小组仓库由本人决定；报告与截图已经能独立证明过程。
 
-## 五、仍需本人完成的操作
+## 五、上传与发 Issue 结果（2026-11-26 已完成）
 
-1. 把本报告目录（及实践 01 的 `实践课1-Pi-Agent/`）复制到个人作业仓库并 push。此前使用的个人仓库是 https://github.com/Li0Fong1/feng02work ，也可以用其他个人仓库。
-2. 在课程作业仓库 https://github.com/hunnuOpenSourceSoftware2026/assignments/issues 分别发起 5 条 Issue，正文附个人报告链接（实践 2 另附小组仓库链接）：
-   - `实践课1： Pi Agent安装与使用 QuKaifeng`
-   - `实践课2：组织建仓与源码分析 QuKaifeng`
-   - `实践课3：Pi Agent源码安装与编译 QuKaifeng`
-   - `实践课4：Pi Agent模型调用与运行流程 QuKaifeng`
-   - `实践课5：Pi Agent工具调用与会话恢复 QuKaifeng`
-3. 上传后检查图片与 Mermaid 图能否正常显示；若个人仓库对中文路径敏感，可改成英文文件名后同步更新报告引用。
-4. 是否把小组源码仓库的本地改动 commit/push，由本人和组长确认后再做。
+1. **个人仓库已上传并 push**：https://github.com/Li0Fong1/feng02work ，提交 `04435ad`（`补充实践课1-5实验报告、真实截图与源码分析图源`），本地与远端 HEAD 一致。已上传 `practice-reports/` 与 `实践课1-Pi-Agent/`（排除 `.git`、`node_modules`），共 157 个新增文件、57 张截图，无密钥文件。中文路径的链接实测 HTTP 200，浏览器可正常打开（例如 [截图清单.md](https://github.com/Li0Fong1/feng02work/blob/main/%E5%AE%9E%E8%B7%B5%E8%AF%BE1-Pi-Agent/%E6%88%AA%E5%9B%BE%E6%B8%85%E5%8D%95.md)）。
+2. **5 条 Issue 已在课程仓库发起**（作者 `Li0Fong1`，均 open，正文附个人报告链接；实践 2 另附小组仓库链接）：
+   - [#402 实践课1： Pi Agent安装与使用 QuKaifeng](https://github.com/hunnuOpenSourceSoftware2026/assignments/issues/402)
+   - [#403 实践课2：组织建仓与源码分析 QuKaifeng](https://github.com/hunnuOpenSourceSoftware2026/assignments/issues/403)
+   - [#404 实践课3：Pi Agent源码安装与编译 QuKaifeng](https://github.com/hunnuOpenSourceSoftware2026/assignments/issues/404)
+   - [#405 实践课4：Pi Agent模型调用与运行流程 QuKaifeng](https://github.com/hunnuOpenSourceSoftware2026/assignments/issues/405)
+   - [#406 实践课5：Pi Agent工具调用与会话恢复 QuKaifeng](https://github.com/hunnuOpenSourceSoftware2026/assignments/issues/406)
+3. 网页表单提交时持续报 `Error: Unable to create issue`（当时全班正集中提交，疑似限流），改用已登录账号的 GitHub API 提交，5 条均返回 HTTP 201 并已在浏览器逐条核验显示正常。
+4. 小组源码仓库的本地改动（`opencode-go.ts`、`agent-loop.ts` 等）按本人要求**暂不 commit/push**，保持原样。
